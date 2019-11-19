@@ -1,0 +1,24 @@
+<ion-header color="danger">
+  <ion-toolbar color="danger">
+    <ion-title>Cursos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h3 style="text-align: center;">Bienvenido, {{datos.usuario | titlecase}}</h3>
+  <ion-card
+    *ngFor="let curso of cursos"
+    (click)="obtenerCurso(curso.id_cursos)"
+  >
+    <img src="../../../assets/images/img1.jpg.jpg" alt="" />
+    <ion-card-header>
+      <ion-card-subtitle> {{curso.nombre}} </ion-card-subtitle>
+      <ion-card-title> {{curso.gerente_imparte}} </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile, and
+      climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+</ion-content>

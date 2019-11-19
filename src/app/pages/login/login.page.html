@@ -1,0 +1,204 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-slides class="mainSlide" #slidePrincipal>
+    <ion-slide>
+      <form (ngSubmit)="login(fLogin)" #fLogin="ngForm">
+        <img
+          src="../../../assets/images/logo.png"
+          alt=""
+          style="height: 75px;"
+        />
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col>
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Usuario</ion-label>
+                  <ion-input
+                    name="usuario"
+                    type="text"
+                    [(ngModel)]="loginUser.usuario"
+                    required
+                  ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Contraseña</ion-label>
+                  <ion-input
+                    name="password"
+                    type="password"
+                    [(ngModel)]="loginUser.pass"
+                    required
+                  ></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ion-label *ngIf="errorCampos" color="danger"
+            >Debes llenar ambos campos</ion-label
+          >
+
+          <ion-row>
+            <ion-col>
+              <ion-button
+                type="submit"
+                color="danger"
+                expand="block"
+                shape="round"
+              >
+                Login
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid fixed>
+        <form (ngSubmit)="registro(fRegistro)" #fRegistro="ngForm">
+          <ion-row>
+            <ion-col>
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Número de Empleado</ion-label>
+                  <ion-input
+                    name="num_empleado"
+                    type="text"
+                    required
+                    [(ngModel)]="regUser.id"
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Usuario</ion-label>
+                  <ion-input
+                    name="usuario"
+                    type="text"
+                    required
+                    [(ngModel)]="regUser.usuario"
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Teléfono</ion-label>
+                  <ion-input
+                    name="telefono"
+                    type="tel"
+                    required
+                    [(ngModel)]="regUser.telefono"
+                  ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Correo</ion-label>
+                  <ion-input
+                    name="email"
+                    type="email"
+                    required
+                    [(ngModel)]="regUser.correo"
+                  ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Contraseña</ion-label>
+                  <ion-input
+                    name="password"
+                    type="password"
+                    required
+                    [(ngModel)]="regUser.pass"
+                  ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>Puesto</ion-label>
+                  <ion-select
+                    okText="Aceptar"
+                    cancelText="Cancelar"
+                    required
+                    [(ngModel)]="regUser.rol"
+                    name="puesto"
+                  >
+                    <ion-select-option value="1">Gerente</ion-select-option>
+                    <ion-select-option value="2">Asistente</ion-select-option>
+                    <ion-select-option value="3">Supervisor</ion-select-option>
+                    <ion-select-option value="4">Auxiliar</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ion-label *ngIf="errorCampos" color="danger"
+            >Todos los campos son obligatorios</ion-label
+          >
+          <ion-label *ngIf="errorNumEmpl" color="danger"
+            >El número de empleado debe ser mayor a 6 carácteres</ion-label
+          >
+
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="danger" expand="block">
+                Crear usuario
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          *ngIf="seleccion"
+          expand="block"
+          shape="round"
+          color="danger"
+          (click)="mostrarLogin()"
+        >
+          Ingresar
+        </ion-button>
+        <ion-button
+          *ngIf="!seleccion"
+          expand="block"
+          shape="round"
+          fill="outline"
+          color="danger"
+          (click)="mostrarLogin()"
+        >
+          Ingresar
+        </ion-button>
+      </ion-col>
+
+      <ion-col>
+        <ion-button
+          *ngIf="seleccion"
+          expand="block"
+          shape="round"
+          fill="outline"
+          color="danger"
+          (click)="mostrarRegistro()"
+        >
+          Registrarme
+        </ion-button>
+        <ion-button
+          *ngIf="!seleccion"
+          expand="block"
+          shape="round"
+          color="danger"
+          (click)="mostrarRegistro()"
+        >
+          Registrarme
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
