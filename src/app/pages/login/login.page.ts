@@ -67,7 +67,12 @@ export class LoginPage implements OnInit {
       this.errorCampos = false;
 
       if (this.DatosUsuarios.success) {
-        this.navCtrl.navigateRoot("/cursos", { animated: true });
+        if (this.DatosUsuarios.result.rol === "1") {
+          console.log("Es gerente");
+          this.navCtrl.navigateRoot("/gerencia", { animated: true });
+        } else {
+          this.navCtrl.navigateRoot("/cursos", { animated: true });
+        }
         this.storage.set("dataUsuarios", this.DatosUsuarios.result);
       } else {
         this.presentAlert();

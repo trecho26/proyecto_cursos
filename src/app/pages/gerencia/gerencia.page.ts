@@ -1,14 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { Storage } from "@ionic/storage";
 import { ConexionApiService } from "src/app/services/conexion-api.service";
-import { NavController } from "@ionic/angular";
+import { NavController, PopoverController } from "@ionic/angular";
+import { Storage } from "@ionic/storage";
+import { PopinfoComponent } from "src/app/components/popinfo/popinfo.component";
 
 @Component({
-  selector: "app-cursos",
-  templateUrl: "./cursos.page.html",
-  styleUrls: ["./cursos.page.scss"]
+  selector: "app-gerencia",
+  templateUrl: "./gerencia.page.html",
+  styleUrls: ["./gerencia.page.scss"]
 })
-export class CursosPage implements OnInit {
+export class GerenciaPage implements OnInit {
   cursos = [];
   cursoParam: any;
   id: any;
@@ -25,7 +26,8 @@ export class CursosPage implements OnInit {
   constructor(
     private storage: Storage,
     private serv: ConexionApiService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverCtrl: PopoverController
   ) {}
 
   ngOnInit() {
@@ -38,8 +40,14 @@ export class CursosPage implements OnInit {
     }, 1500);
   }
 
-  obtenerUsuario() {
-    this.navCtrl.navigateRoot("/usuario", { animated: true });
+  async obtenerUsuario(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: PopinfoComponent,
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+    //this.navCtrl.navigateRoot("/usuario", { animated: true });
   }
 
   async obtenerStorage() {
@@ -58,5 +66,10 @@ export class CursosPage implements OnInit {
 
   obtenerCurso(id: any) {
     this.navCtrl.navigateForward(["/curso", id]);
+  }
+
+  agregarCurso() {
+    console.log("Agregar curso");
+    this.navCtrl.navigateForward("/agregar-curso", { animated: true });
   }
 }

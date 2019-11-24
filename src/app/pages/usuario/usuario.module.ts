@@ -8,7 +8,6 @@ import { UsuarioPageRoutingModule } from "./usuario-routing.module";
 
 import { UsuarioPage } from "./usuario.page";
 import { MenuComponent } from "src/app/components/menu/menu.component";
-
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, UsuarioPageRoutingModule],
   declarations: [UsuarioPage, MenuComponent]

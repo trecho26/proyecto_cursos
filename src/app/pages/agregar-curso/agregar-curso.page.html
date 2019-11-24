@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear curso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6" style="text-align: center;">
+        <ion-icon
+          name="school"
+          style="font-size: 5rem;"
+          color="danger"
+        ></ion-icon>
+      </ion-col>
+      <ion-col size="12">
+        <form (ngSubmit)="crearCurso(fCurso)" #fCurso="ngForm">
+          <ion-item>
+            <ion-label position="floating">Nombre del curso</ion-label>
+            <ion-input
+              type="text"
+              name="nombre"
+              [(ngModel)]="curso.nombre"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Hora</ion-label>
+            <ion-datetime
+              displayFormat="HH:mm:ss"
+              name="hora"
+              [(ngModel)]="curso.hora"
+              required
+            ></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Fecha</ion-label>
+            <ion-datetime
+              displayFormat="YYYY-MM-DD"
+              name="fecha"
+              [(ngModel)]="curso.fecha"
+              required
+            ></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Gerente que lo imparte</ion-label>
+            <ion-input
+              type="text"
+              name="nombre"
+              [(ngModel)]="curso.gerente"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-col>
+            <ion-button
+              type="submit"
+              color="danger"
+              expand="block"
+              shape="round"
+            >
+              Crear curso
+            </ion-button>
+          </ion-col>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

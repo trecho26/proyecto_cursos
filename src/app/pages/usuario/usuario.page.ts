@@ -41,7 +41,7 @@ export class UsuarioPage implements OnInit {
 
   async editarValores() {
     const alert = await this.alertController.create({
-      header: "Prompt!",
+      header: "Edita tus datos",
       inputs: [
         {
           name: "usuario",

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { NavController } from "@ionic/angular";
+import { NavController, PopoverController } from "@ionic/angular";
 
 @Component({
   selector: "app-header",
@@ -7,11 +7,20 @@ import { NavController } from "@ionic/angular";
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    private navCtrl: NavController,
+    private popoverCtrl: PopoverController
+  ) {}
 
   ngOnInit() {}
 
-  obtenerUsuario() {
-    this.navCtrl.navigateRoot("/usuario", { animated: true });
+  async obtenerUsuario(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: PopinfoComponent,
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+    //this.navCtrl.navigateRoot("/usuario", { animated: true });
   }
 }

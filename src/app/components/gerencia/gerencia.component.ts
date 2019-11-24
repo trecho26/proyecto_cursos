@@ -1,14 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { Storage } from "@ionic/storage";
 import { ConexionApiService } from "src/app/services/conexion-api.service";
 import { NavController } from "@ionic/angular";
 
 @Component({
-  selector: "app-cursos",
-  templateUrl: "./cursos.page.html",
-  styleUrls: ["./cursos.page.scss"]
+  selector: "app-gerencia",
+  templateUrl: "./gerencia.component.html",
+  styleUrls: ["./gerencia.component.scss"]
 })
-export class CursosPage implements OnInit {
+export class GerenciaComponent implements OnInit {
   cursos = [];
   cursoParam: any;
   id: any;
@@ -28,15 +27,7 @@ export class CursosPage implements OnInit {
     private navCtrl: NavController
   ) {}
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.obtenerStorage().then(() => {
-        if (this.datos.rol === "1") {
-        }
-      });
-      this.obtenerCursos();
-    }, 1500);
-  }
+  ngOnInit() {}
 
   obtenerUsuario() {
     this.navCtrl.navigateRoot("/usuario", { animated: true });
