@@ -1,7 +1,7 @@
 <ion-header color="danger">
   <ion-toolbar color="danger">
     <ion-buttons slot="end">
-      <ion-button (click)="obtenerUsuario()">
+      <ion-button (click)="menu()">
         <ion-icon slot="start" name="person"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -9,7 +9,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<app-menu2></app-menu2>
+
+<ion-content class="ion-padding" id="principal">
   <div class="sk-chase align-self-center" *ngIf="loading">
     <div class="sk-chase-dot"></div>
     <div class="sk-chase-dot"></div>
@@ -22,20 +24,24 @@
     <h3 style="text-align: center;">
       Bienvenido, {{datos.usuario}}
     </h3>
-    <ion-card
-      *ngFor="let curso of cursos"
-      (click)="obtenerCurso(curso.id_cursos)"
-    >
-      <img src="../../../assets/images/img1.jpg.jpg" alt="" />
-      <ion-card-header>
-        <ion-card-subtitle> {{curso.nombre}} </ion-card-subtitle>
-        <ion-card-title> {{curso.gerente_imparte}} </ion-card-title>
-      </ion-card-header>
+    <ion-card *ngFor="let curso of cursos">
+      <div (click)="obtenerCurso(curso.id_cursos)">
+        <img src="../../../assets/images/img1.jpg.jpg" alt="" />
+        <ion-card-header>
+          <ion-card-subtitle> {{curso.nombre}} </ion-card-subtitle>
+          <ion-card-title> {{curso.gerente_imparte}} </ion-card-title>
+        </ion-card-header>
 
+        <ion-card-content>
+          Keep close to Nature's heart... and break clear away, once in awhile,
+          and climb a mountain or spend a week in the woods. Wash your spirit
+          clean.
+        </ion-card-content>
+      </div>
       <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit
-        clean.
+        <ion-button (click)="onClick()">
+          Asistire
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </div>

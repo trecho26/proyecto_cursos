@@ -20,9 +20,9 @@ export class MenuComponent implements OnInit {
   cursos() {
     this.storage.get("dataUsuarios").then((val) => {
       if (val.rol === "1") {
-        this.navCtrl.navigateRoot("/gerencia");
+        this.navCtrl.navigateRoot("/gerencia", { animated: true });
       } else {
-        this.navCtrl.navigateRoot("/cursos");
+        this.navCtrl.navigateRoot("/cursos", { animated: true });
       }
     });
 

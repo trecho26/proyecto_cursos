@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { ConexionApiService } from "src/app/services/conexion-api.service";
-import { NavController } from "@ionic/angular";
+import { NavController, MenuController } from "@ionic/angular";
 
 @Component({
   selector: "app-cursos",
@@ -25,7 +25,8 @@ export class CursosPage implements OnInit {
   constructor(
     private storage: Storage,
     private serv: ConexionApiService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private menuCtrl: MenuController
   ) {}
 
   ngOnInit() {
@@ -58,5 +59,10 @@ export class CursosPage implements OnInit {
 
   obtenerCurso(id: any) {
     this.navCtrl.navigateForward(["/curso", id]);
+  }
+
+  menu() {
+    this.menuCtrl.enable(true, "user");
+    this.menuCtrl.open("user");
   }
 }

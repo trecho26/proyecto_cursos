@@ -1,0 +1,13 @@
+<ion-menu side="end" menuId="user" contentId="principal">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-title>Navegacion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item (click)="verPerfil()">Ver perfil</ion-item>
+      <ion-item [routerLink]="['/']">Cerrar sesion</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
