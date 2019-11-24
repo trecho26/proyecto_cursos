@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Cursos Costco</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<app-menu></app-menu>
+
+<ion-content class="ion-padding" id="principal">
+  <ion-icon slot="start" name="person"></ion-icon>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-size: 2rem; font-weight: 600;">
+        #{{datos.id}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-label> {{datos.usuario}} </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-label> {{datos.correo}} </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="call" slot="start"></ion-icon>
+      <ion-label> {{datos.telefono}} </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="briefcase" slot="start"></ion-icon>
+      <ion-label> {{datos.tipoRol}} </ion-label>
+    </ion-item>
+
+    <ion-grid fixed>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6">
+          <ion-button (click)="editarValores()" color="danger">
+            Editar valores
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

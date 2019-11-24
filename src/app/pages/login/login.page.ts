@@ -17,7 +17,6 @@ export class LoginPage implements OnInit {
   seleccion = true;
   errorCampos = false;
   errorNumEmpl = false;
-
   loginUser = {
     tipoMov: "login",
     usuario: "",
@@ -33,6 +32,14 @@ export class LoginPage implements OnInit {
     correo: "",
     rol: ""
   };
+
+  validationReg = {
+    tipoMov: "checkUser",
+    id: "",
+    usuario: "",
+    correo: ""
+  };
+
   constructor(
     private serv: ConexionApiService,
     private navCtrl: NavController,
@@ -69,7 +76,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  //Alert
+  //Alert login
   async presentAlert() {
     const alert = await this.alertController.create({
       header: "Ups...",
@@ -106,9 +113,35 @@ export class LoginPage implements OnInit {
       return;
     }
     console.log(this.regUser);
-    //this.presentAlertConfirm();
-    this.serv.postData(this.regUser);
-    this.modal();
+
+    //Validar que los datos no existan
+    this.validarRegistroUsuario().then((data) => {
+      let mensaje: string;
+      let datos: any = data;
+      if (datos.success) {
+        mensaje = datos.result;
+        this.presentAlertReg(mensaje);
+      } else {
+        console.log("Usuario registrado");
+        this.serv.postData(this.regUser);
+        this.modal();
+      }
+    });
+  }
+
+  async presentAlertReg(pMensaje) {
+    const alert = await this.alertController.create({
+      header: "Ups...",
+      subHeader: "No se ha podido registrar este usuario",
+      message: `El ${pMensaje} ya existe`,
+      buttons: ["Aceptar"]
+    });
+
+    await alert.present();
+  }
+
+  validarRegistroUsuario() {
+    return this.serv.postData(this.validationReg);
   }
 
   mostrarRegistro() {
@@ -127,23 +160,6 @@ export class LoginPage implements OnInit {
     this.slides.lockSwipes(true);
     this.errorCampos = false;
   }
-
-  // async presentAlertConfirm() {
-  //   const alert = await this.alertController.create({
-  //     header: "Aceptado",
-  //     message: "<img src='../../../assets/images/img1.jpg.jpg'>",
-  //     buttons: [
-  //       {
-  //         text: "Aceptar",
-  //         handler: () => {
-  //           this.mostrarLogin();
-  //         }
-  //       }
-  //     ]
-  //   });
-
-  //   await alert.present();
-  // }
 
   modal() {
     Swal.fire({

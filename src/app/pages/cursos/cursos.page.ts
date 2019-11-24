@@ -14,6 +14,7 @@ export class CursosPage implements OnInit {
   cursoParam: any;
   id: any;
   resp: any;
+  loading = true;
   datos = {
     usuario: "",
     pass: "",
@@ -27,17 +28,24 @@ export class CursosPage implements OnInit {
     private serv: ConexionApiService,
     private navCtrl: NavController
   ) {
-    this.obtenerCursos();
-    this.obtenerStorage();
+    setTimeout(() => {
+      this.obtenerCursos();
+      this.obtenerStorage();
+    }, 1500);
   }
 
   ngOnInit() {}
+
+  obtenerUsuario() {
+    this.navCtrl.navigateRoot("/usuario", { animated: true });
+  }
 
   async obtenerStorage() {
     await this.storage.get("dataUsuarios").then((val) => {
       this.datos = val;
     });
     console.log(this.datos);
+    this.loading = false;
   }
 
   async obtenerCursos() {
