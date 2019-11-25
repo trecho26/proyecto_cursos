@@ -9,14 +9,14 @@
 
 <ion-content class="ion-padding">
   <!-- List of Sliding Items -->
-  <ion-list>
-    <ion-item-sliding *ngFor="let curso of cursos">
+  <ion-list #lista>
+    <ion-item-sliding *ngFor="let curso of cursos; let i = index">
       <ion-item>
         <ion-label> {{curso.id_cursos}} - {{curso.nombre}} </ion-label>
         <ion-badge color="danger"> {{curso.asistencias}} </ion-badge>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option (click)="unread(item)">Ver más</ion-item-option>
+        <ion-item-option (click)="presentModal(i)">Ver más</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

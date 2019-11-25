@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> {{ nombre }} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let inscrito of inscritos">
+      <ion-thumbnail slot="start">
+        <img
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw=="
+        />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ inscrito.usuario }}</h2>
+        <p>{{ inscrito.correo }}</p>
+        <p>{{ inscrito.telefono }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
