@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ConexionApiService } from "src/app/services/conexion-api.service";
-import { DatePipe } from "@angular/common";
-import { PopoverController } from "@ionic/angular";
+import { Storage } from "@ionic/storage";
+import { ToastController } from "@ionic/angular";
 
 @Component({
   selector: "app-curso",
@@ -22,10 +22,12 @@ export class CursoPage implements OnInit {
     tipoMov: "getCurso",
     id: ""
   };
+  asistencia = {};
   constructor(
     private activeRoute: ActivatedRoute,
     private serv: ConexionApiService,
-    private popoverCtrl: PopoverController
+    private storage: Storage,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -39,5 +41,36 @@ export class CursoPage implements OnInit {
     console.log(this.resp);
     this.curso = this.resp.result;
     console.log(this.curso);
+  }
+
+  async agregarInscripcion() {
+    await this.storage.get("dataUsuarios").then((data) => {
+      this.asistencia = {
+        tipoMov: "asistencia",
+        id: data.id,
+        id_curso: this.post.id
+      };
+    });
+    console.log(this.asistencia);
+    let bandera = await this.serv.postData(this.asistencia);
+    console.log(bandera);
+    this.presentToast(bandera);
+  }
+
+  async presentToast(pMensaje) {
+    console.log(pMensaje);
+    if (pMensaje.success) {
+      const toast = await this.toastCtrl.create({
+        message: `Se guardó tu asistencia para el curso: ${this.curso.nombre}`,
+        duration: 2000
+      });
+      toast.present();
+    } else {
+      const toast = await this.toastCtrl.create({
+        message: pMensaje.result,
+        duration: 2000
+      });
+      toast.present();
+    }
   }
 }

@@ -19,6 +19,9 @@ export class PopinfoComponent implements OnInit {
       case "perfil":
         this.navCtrl.navigateRoot("/usuario", { animated: true });
         break;
+      case "cursos":
+        this.navCtrl.navigateForward("/cursos-impartir", { animated: true });
+        break;
       default:
         this.navCtrl.navigateRoot("/", { animated: true });
         break;

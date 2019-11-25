@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'agregar-curso',
     loadChildren: () => import('./pages/agregar-curso/agregar-curso.module').then( m => m.AgregarCursoPageModule)
   },
+  {
+    path: 'cursos-impartir',
+    loadChildren: () => import('./pages/cursos-impartir/cursos-impartir.module').then( m => m.CursosImpartirPageModule)
+  },
 ];
 
 @NgModule({
