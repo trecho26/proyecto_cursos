@@ -10,7 +10,7 @@ import { ModalComponent } from "src/app/components/modal/modal.component";
   styleUrls: ["./cursos-impartir.page.scss"]
 })
 export class CursosImpartirPage implements OnInit {
-  @ViewChild("lista") lista: IonList;
+  @ViewChild("lista", { static: false }) lista: IonList;
   getCursos = {
     tipoMov: "cursosImpartir",
     id: ""
@@ -31,7 +31,7 @@ export class CursosImpartirPage implements OnInit {
       this.getCursos.id = val.id;
       console.log(this.getCursos);
       //Mandar la peticion a la API
-      this.serv.postData(this.getCursos).then((val) => {
+      this.serv.postData(this.getCursos).then((val: any) => {
         this.cursos = val.result;
         console.log(this.cursos);
         this.modalInfo = val.result;

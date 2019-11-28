@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController, PopoverController } from "@ionic/angular";
+import { PopinfoComponent } from "src/app/components/popinfo/popinfo.component";
 
 @Component({
   selector: "app-header",

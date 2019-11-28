@@ -11,6 +11,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HttpClientModule } from "@angular/common/http";
 import { IonicStorageModule } from "@ionic/storage";
 
+import { File } from "@ionic-native/file/ngx";
+import { FileOpener } from "@ionic-native/file-opener/ngx";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,7 +27,9 @@ import { IonicStorageModule } from "@ionic/storage";
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    File,
+    FileOpener
   ],
   bootstrap: [AppComponent]
 })
