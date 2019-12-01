@@ -19,6 +19,10 @@ export class ModalComponent implements OnInit {
     tipoMov: "obtenerAsistencia",
     id: ""
   };
+  getPdf = {
+    tipoMov: "pdf",
+    id_curso: ""
+  };
   inscritos: any;
   pdfObject = null;
   constructor(
@@ -30,6 +34,7 @@ export class ModalComponent implements OnInit {
     private fileOpener: FileOpener
   ) {
     this.getInscritos.id = navParams.get("id_curso");
+    this.getPdf.id_curso = navParams.get("id_curso");
   }
 
   ngOnInit() {
@@ -43,38 +48,70 @@ export class ModalComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  generarPDF() {
-    let integrantes = [
-      [
-        { text: "Número de empleado", style: "tableHeader" },
-        { text: "Nombre", style: "tableHeader" },
-        { text: "Puesto", style: "tableHeader" },
-        { text: "Correo", style: "tableHeader" }
-      ],
-      ["000001", "Hector Alfonso", "Auxiliar", "hector@gmail.com"],
-      ["000002", "Jose Perez", "Supervisor", "jose@gmail.com"],
-      ["000003", "Juan Pedro", "Gerente", "juan@gmail.com"],
-      ["000004", "Jose Carlos", "Asistente", "josecarlos@gmail.com"],
-      ["000005", "Paola Ruiz", "Auxiliar", "paola@gmail.com"]
-    ];
+  async generarPDF() {
+    var integrantes = [];
+    var integrante = {
+      Empleado: "",
+      Nombre: "",
+      Correo: "",
+      Departamento: "",
+      Puesto: ""
+    };
+    console.log(this.getPdf);
+    await this.serv.postData(this.getPdf).then((val: any) => {
+      for (let i = 0; i <= 4; i++) {
+        integrante.Empleado = val.result[i].id;
+        integrante.Nombre = val.result[i].nombre;
+        integrante.Correo = val.result[i].correo;
+        integrante.Departamento = val.result[i].departamento;
+        integrante.Puesto = val.result[i].tipo_rol;
+        console.log(integrante);
+        integrantes.push(integrante);
+        integrante = {
+          Empleado: "",
+          Nombre: "",
+          Correo: "",
+          Departamento: "",
+          Puesto: ""
+        };
+      }
+      console.log(integrantes);
+    });
 
+    function buildTableBody(data, columns) {
+      var body = [];
+      body.push(columns);
+      data.forEach(function(row) {
+        var dataRow = [];
+
+        columns.forEach(function(column) {
+          dataRow.push(row[column].toString());
+        });
+
+        body.push(dataRow);
+      });
+      return body;
+    }
+
+    function table(data, columns) {
+      return {
+        style: "tableExample",
+        table: {
+          headerRows: 1,
+          body: buildTableBody(data, columns)
+        }
+      };
+    }
     var dd = {
       content: [
-        { text: "Tables", style: "header" },
-        "Official documentation is in progress, this document is just a glimpse of what is possible with pdfmake and its layout engine.",
-        {
-          text:
-            "A simple table (no headers, no width specified, no spans, no styling)",
-          style: "subheader"
-        },
-        "The following table has nothing more than a body array",
-        {
-          style: "tableExample",
-
-          table: {
-            body: integrantes
-          }
-        }
+        { text: "Tablas dinamicas", style: "header" },
+        table(integrantes, [
+          "Empleado",
+          "Nombre",
+          "Correo",
+          "Departamento",
+          "Puesto"
+        ])
       ],
       styles: {
         header: {

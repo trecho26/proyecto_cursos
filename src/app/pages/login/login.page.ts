@@ -26,6 +26,8 @@ export class LoginPage implements OnInit {
   regUser = {
     tipoMov: "registro",
     id: "",
+    nombre: "",
+    departamento: "",
     usuario: "",
     pass: "",
     telefono: "",

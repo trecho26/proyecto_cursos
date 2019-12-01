@@ -11,6 +11,8 @@ import { ConexionApiService } from "src/app/services/conexion-api.service";
 export class UsuarioPage implements OnInit {
   datos = {
     id: "",
+    nombre: "",
+    departamento: "",
     usuario: "",
     pass: "",
     rol: "",
